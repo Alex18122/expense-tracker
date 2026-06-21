@@ -1,20 +1,8 @@
 import argparse
 from re import sub
+import shlex
 from turtle import update
 
-class Usuario:
-    def __init__(self,nombre,saldo):
-
-        self.nombre = nombre
-        self.saldo = saldo
-
-    def ingreso(self,ingreso):
-
-        self.saldo += ingreso
-
-    def gasto(self,gasto):
-
-        self.saldo -= gasto
 
 def comandos_parser():
 
@@ -42,19 +30,47 @@ def comandos_parser():
     update_parser = subparser.add_parser("update", help= "modifica un gasto")
     update_parser.add_argument("id", help= "id del gasto a modificar")
 
+    return parser
+
 parser = comandos_parser()
 
+def guardar_movimientos():
 
-def expense_tracker(user : Usuario):
+    print("a")
+
+def expense_tracker():
 
     print("Expense tracker")
     print("-"*20)
 
-    print("Cuenta : " + user.nombre)
+    while True:
+
+        entrada = input("$ expense-tracker")
+
+        partes = shlex.split(entrada)
+        args = parser.parse_args(partes)
+
+    if args.comando == "add":
+        print("a")
+    elif args.comando == "list":
+        print("b")
+    elif args.comando == "summary":
+        print("c")
+    elif args.comando == "delete":
+        print("d")
+    elif args.comando == "budget":
+        print("e")
+    elif args.comando == "update":
+        print("f")
 
 
 
-cuantaMov = {}
-user = Usuario("Gabriel",10000)
+
+
+
+
+
+cuentaMov = {}
+
 
 expense_tracker(user)
