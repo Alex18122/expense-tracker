@@ -50,18 +50,18 @@ def expense_tracker():
         partes = shlex.split(entrada)
         args = parser.parse_args(partes)
 
-    if args.comando == "add":
-        print("a")
-    elif args.comando == "list":
-        print("b")
-    elif args.comando == "summary":
-        print("c")
-    elif args.comando == "delete":
-        print("d")
-    elif args.comando == "budget":
-        print("e")
-    elif args.comando == "update":
-        print("f")
+        if args.comando == "add":
+            print("a")
+        elif args.comando == "list":
+            print("b")
+        elif args.comando == "summary":
+            print("c")
+        elif args.comando == "delete":
+            print("d")
+        elif args.comando == "budget":
+            print("e")
+        elif args.comando == "update":
+            print("f")
 
 
 
@@ -73,4 +73,4 @@ def expense_tracker():
 cuentaMov = {}
 
 
-expense_tracker(user)
+expense_tracker()
