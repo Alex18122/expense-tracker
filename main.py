@@ -1,8 +1,19 @@
 import argparse
-from re import sub
 import shlex
-from turtle import update
 
+from pydantic import BaseModel
+
+class Cuenta(BaseModel):
+
+    usuario: str
+    saldo: int
+
+class Movimientos(BaseModel,Cuenta):
+
+    nuevoSaldo: int
+    tipoOperacion: str
+    valorMovimiento: int
+    
 
 def comandos_parser():
 
@@ -25,7 +36,7 @@ def comandos_parser():
 
     budget_parser = subparser.add_parser("budget", help= "presupuesto mensual")
     budget_parser.add_argument("--new", help="actualiza el presupuesto mensual")
-    budget_parser.add_argument("amount", help="valor del nuevo presupuesto")
+    budget_parser.add_argument("--amount", help="valor del nuevo presupuesto")
 
     update_parser = subparser.add_parser("update", help= "modifica un gasto")
     update_parser.add_argument("id", help= "id del gasto a modificar")
@@ -45,7 +56,7 @@ def expense_tracker():
 
     while True:
 
-        entrada = input("$ expense-tracker")
+        entrada = input("$ expense-tracker ")
 
         partes = shlex.split(entrada)
         args = parser.parse_args(partes)
@@ -62,12 +73,6 @@ def expense_tracker():
             print("e")
         elif args.comando == "update":
             print("f")
-
-
-
-
-
-
 
 
 cuentaMov = {}
