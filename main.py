@@ -1,19 +1,41 @@
 import argparse
+import json
+from pathlib import Path
 import shlex
 
 from pydantic import BaseModel
 
 class Cuenta(BaseModel):
 
-    usuario: str
     saldo: int
-
-class Movimientos(BaseModel,Cuenta):
-
     nuevoSaldo: int
-    tipoOperacion: str
+    descOperacion: str
     valorMovimiento: int
-    
+
+ARCHIVO = "registro.json"
+
+def cargar_movimientos():
+
+    if not Path(ARCHIVO).exists():
+
+        return []
+
+    with open(ARCHIVO,"w") as f :
+
+        movimientos = json.load(f)
+
+    return [Cuenta(**d) for d in movimientos]
+
+
+def guardar_movimientos():
+
+    registro = [mov.model_dump() for mov in movimientos]
+
+    with open(ARCHIVO, "w") as f:
+        json.dump(registro, f, indent= 2, default=str)
+
+
+movimientos = cargar_movimientos()
 
 def comandos_parser():
 
